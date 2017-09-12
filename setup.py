@@ -17,7 +17,7 @@ requirements = [
 ]
 
 setup_requirements = [
-    # TODO(behzadg): put setup requirements (distutils extensions, etc.) here
+    # TODO(biggorilla-gh): put setup requirements (distutils extensions, etc.) here
 ]
 
 test_requirements = [
@@ -31,7 +31,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author="BigGorilla Team",
     author_email='behzad@recruit.ai',
-    url='https://github.com/behzadg/koko',
+    url='https://github.com/biggorilla-gh/koko',
     packages=find_packages(include=['koko']),
     entry_points={
         'console_scripts': [

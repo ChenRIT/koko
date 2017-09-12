@@ -6,15 +6,15 @@ koko
 .. image:: https://img.shields.io/pypi/v/koko.svg
         :target: https://pypi.python.org/pypi/koko
 
-.. image:: https://img.shields.io/travis/behzadg/koko.svg
-        :target: https://travis-ci.org/behzadg/koko
+.. image:: https://img.shields.io/travis/biggorilla-gh/koko.svg
+        :target: https://travis-ci.org/biggorilla-gh/koko
 
 .. image:: https://readthedocs.org/projects/koko/badge/?version=latest
         :target: https://koko.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/behzadg/koko/shield.svg
-     :target: https://pyup.io/repos/github/behzadg/koko/
+.. image:: https://pyup.io/repos/github/biggorilla-gh/koko/shield.svg
+     :target: https://pyup.io/repos/github/biggorilla-gh/koko/
      :alt: Updates
 
 
