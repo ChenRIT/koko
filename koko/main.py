@@ -45,13 +45,15 @@ def run(query_file):
 
 # main
 
-if len(sys.argv) < 2:
-    print("Usage: python koko.py *.koko")
-    exit()
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python koko.py *.koko")
+        exit()
 
-query_files = sys.argv[1:]
+    query_files = sys.argv[1:]
 
-for query_file in query_files:
-    run(query_file)
+    for query_file in query_files:
+        run(query_file)
 
-
+if __name__ == '__main__':
+    main()
