@@ -33,7 +33,7 @@ test_requirements = [
 
 setup(
     name='pykoko',
-    version='0.1.1',
+    version='0.1.3',
     description="KOKO is an easy-to-use entity extraction tool",
     long_description=readme + '\n\n' + history,
     author="BigGorilla Team",
@@ -45,6 +45,7 @@ setup(
             'koko=koko.cli:main'
         ]
     },
+    package_data={'koko': ['dict/*']},
     include_package_data=True,
     install_requires=requirements,
     license="Apache Software License 2.0",
