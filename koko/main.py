@@ -28,12 +28,12 @@ def run(query_file):
     if not parser.is_parsed:
         print('Syntax error: ', parser.error_msg)
         return
-    
+
     print("Rewritten query:\n", parser.toString())
-        
+
     with open(parser.document_name, 'r') as myfile:
         document = myfile.read()
-        
+
     extractor = EntityExtractor(KokoDocument(document), True)
     entities = extractor.TopEntities(query)
     print("\nResults:\n")
@@ -54,4 +54,4 @@ query_files = sys.argv[1:]
 for query_file in query_files:
     run(query_file)
 
-    
+

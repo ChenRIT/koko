@@ -25,7 +25,7 @@ test_requirements = [
 ]
 
 setup(
-    name='koko',
+    name='pykoko',
     version='0.1.0',
     description="KOKO is an easy-to-use entity extraction tool",
     long_description=readme + '\n\n' + history,
