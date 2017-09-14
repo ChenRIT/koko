@@ -16,7 +16,7 @@ limitations under the License.
 
 import sys
 import logging
-from query_processor import QueryProcessor
+from .query_processor import QueryProcessor
 
 
 def run(query_file, doc_parser="koko", output_format="text", log_level="info"):
