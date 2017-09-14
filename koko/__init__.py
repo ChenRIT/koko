@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from koko.main import run
+from koko.pykoko import run
 
 """Top-level package for koko."""
 
