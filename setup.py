@@ -33,7 +33,7 @@ test_requirements = [
 
 setup(
     name='pykoko',
-    version='0.1.3',
+    version='0.1.4',
     description="KOKO is an easy-to-use entity extraction tool",
     long_description=readme + '\n\n' + history,
     author="BigGorilla Team",
@@ -65,4 +65,5 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     setup_requires=setup_requirements,
+    scripts = ['load_embedding_model.sh'],
 )
