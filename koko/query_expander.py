@@ -26,7 +26,7 @@ ROOT = os.path.abspath(os.path.dirname(__file__))
 class QueryExpander(object):
 
     def __init__(self, lang, embedding_file_path=None, ontology_file_path=None):
-        print('Creating QueryExpander for:', lang)
+        #print('Creating QueryExpander for:', lang)
         self.lang = lang
         self.__embed_vectors = None
         self.__ontology_dict = None
@@ -36,14 +36,14 @@ class QueryExpander(object):
     def __load_embeding_model(self, file_path, max_vocab_size=100000):
         self.__embed_vectors = dict()
         if not file_path:
-            print('Embeddings file not provided')
+            #print('Embeddings file not provided')
             return
         if not os.path.exists(file_path):
-            print('Embeddings file not found:', file_path)
+            #print('Embeddings file not found:', file_path)
             return
         
-        print('Loading the embedding model from:', file_path)
-        bar = progressbar.ProgressBar(max_value=max_vocab_size)
+        #print('Loading the embedding model from:', file_path)
+        #bar = progressbar.ProgressBar(max_value=max_vocab_size)
         with open(file_path, "r") as embed_f:
             for line in embed_f:
                 try:
@@ -54,20 +54,20 @@ class QueryExpander(object):
                         self.__embed_vectors[word] = vec
                 except ValueError:
                     continue
-                bar.update(len(self.__embed_vectors))
+                #bar.update(len(self.__embed_vectors))
                 if len(self.__embed_vectors) == max_vocab_size:
-                    bar.finish()
+                    #bar.finish()
                     return
 
 
     def __load_ontology_file(self, file_path):
         self.__ontology_dict = defaultdict(set)
         if not file_path:
-            print('Ontology file not provided')
+            #print('Ontology file not provided')
             return
         
         if not os.path.exists(file_path):
-            print('Ontology file not found:', file_path)
+            #print('Ontology file not found:', file_path)
             return
         
         print('Loading ontology from:', file_path)
@@ -142,7 +142,7 @@ def create_query_expanders(testing):
         }
         return query_expanders
     
-    print('Loading embedding models')
+    #print('Loading embedding models')
     en_embedding_file_path = ROOT + '/../embeddings/commoncrawl.840B.300d.txt'
     ontology_file_path = ROOT + '/../coffee_ontology.txt'
     ja_embedding_file_path = ROOT + '/../embeddings/japanese_noun_verb_embedding_vectors.txt'
@@ -150,7 +150,7 @@ def create_query_expanders(testing):
         'en': QueryExpander('en', en_embedding_file_path, ontology_file_path),
         'ja': QueryExpander('ja', ja_embedding_file_path)
     }
-    print('Done loading embedding models')
+    #print('Done loading embedding models')
     return query_expanders
 
 def expand_phrase(query_expanders, tokens, wordset):
@@ -170,7 +170,6 @@ def tokenize_phrase(phrase):
         lang = detect(phrase)
     except Exception:
         lang = 'en'
-
     if lang == 'ja':
         doc = GoogleDocument(phrase)
         tokens = [doc[i].text for i in range(len(doc))]
