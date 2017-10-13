@@ -32,15 +32,16 @@ class KokoResponse:
 
 class QueryProcessor:
     
-    def __init__(self, document_parser='koko'):
+    def __init__(self, document_parser='koko', target_lang='en'):
         self.document_parser = document_parser
+        self.target_lang = target_lang
         if self.document_parser == 'spacy':
             logger.info("Loading SpaCy English models")
             self.nlp = spacy.load('en')
             logger.info("Done")
 
     def ProcessQuery(self, query, document=None):
-        query_parser = Parser(query)
+        query_parser = Parser(query, self.target_lang)
         if not query_parser.is_parsed:
             logger.error("Syntax error: %s" % query_parser.error_msg)
             return None

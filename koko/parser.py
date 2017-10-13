@@ -85,8 +85,9 @@ class Predicate:
 
 class Parser:
 
-    def __init__(self, query, wordset=None, testing=False):
+    def __init__(self, query, target_lang='en', wordset=None, testing=False):
         self.query = query
+        self.target_lang = target_lang
         self.wordset = wordset
         self.document_name = ''
         self.sentence_decomposer_server_url = ''
@@ -209,7 +210,7 @@ class Parser:
         end_token = self.query_doc[end]
         char_end = end_token.start
         text = self.query[char_start:char_end]
-        return tokenize_phrase(text)
+        return tokenize_phrase(text, self.target_lang)
 
     def Weight(self):
         self.Literal('{')
@@ -276,7 +277,7 @@ class Parser:
         global query_expanders
         if predicate.matching == 'semantic':
             predicate.expanded_queries = expand_phrase(
-                query_expanders, predicate.context, self.wordset)
+                query_expanders, predicate.context, self.wordset, self.target_lang)
         return predicate
 
     def LeftPredicate(self):

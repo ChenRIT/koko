@@ -35,6 +35,10 @@ op.add_option("--log_level",
               action="store", type="string", dest="log_level",
               default="info",
               help="Logging level: info, warning, error.")
+op.add_option("--target_lang",
+              action="store", type="string", dest="target_lang",
+              default="en",
+              help="Target language: language represented by ISO 639-1 Code")
 
 (opts, args) = op.parse_args()
 if len(args) > 0:
@@ -58,7 +62,7 @@ with open(opts.query_file, 'r') as qfile:
 # Process the KOKO query
 
 from query_processor import QueryProcessor
-processor = QueryProcessor(opts.doc_parser)
+processor = QueryProcessor(opts.doc_parser, opts.target_lang)
 response = processor.ProcessQuery(query)
 
 # Print the results

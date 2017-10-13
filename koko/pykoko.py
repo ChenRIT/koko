@@ -19,7 +19,7 @@ import logging
 from .query_processor import QueryProcessor
 
 
-def run(query_file, doc_parser="koko", output_format="text", log_level="info"):
+def run(query_file, doc_parser="koko", output_format="text", log_level="info", target_lang='en'):
     # Set up logging
     logging_level_dict = {'info': logging.INFO,
                           'warning': logging.WARNING,
@@ -37,7 +37,7 @@ def run(query_file, doc_parser="koko", output_format="text", log_level="info"):
 
     # Process the KOKO query
 
-    processor = QueryProcessor(doc_parser)
+    processor = QueryProcessor(doc_parser, target_lang)
     response = processor.ProcessQuery(query)
 
     # Print the results

@@ -153,21 +153,23 @@ def create_query_expanders(testing):
     #print('Done loading embedding models')
     return query_expanders
 
-def expand_phrase(query_expanders, tokens, wordset):
+def expand_phrase(query_expanders, tokens, wordset, target_lang='en'):
     phrase = " ".join(tokens)
     try:
-        lang = detect(phrase)
+        #lang = detect(phrase)
+        lang = target_lang
     except Exception:
         lang = 'en'
     if not lang in query_expanders:
         return [(tokens, 1.0)]
     return query_expanders[lang].expand(tokens, wordset)
 
-def tokenize_phrase(phrase):
+def tokenize_phrase(phrase, target_lang='en'):
     if len(phrase) == 0:
         return ['']
     try:
-        lang = detect(phrase)
+        #lang = detect(phrase)
+        lang = target_lang
     except Exception:
         lang = 'en'
     if lang == 'ja':
