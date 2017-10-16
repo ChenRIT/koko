@@ -76,3 +76,11 @@ if opts.output_format == 'text':
     print("================================================================")
     for entity in response.entities:
         print("%s %f" % ("{:<50}".format(entity.name), entity.score))
+else:
+    import json
+    import jsonpickle
+    pickled = jsonpickle.encode(response, unpicklable=False)
+    json_result = json.loads(pickled)
+    print(json.dumps(json_result, sort_keys=False, indent=2))
+    with open('json_result.txt', 'w') as ofile:
+        json.dump(json_result, ofile)
