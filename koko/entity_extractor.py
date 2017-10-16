@@ -63,9 +63,9 @@ class EntityExtractor:
         for i in range(len(doc)):
             self.doc_words.add(doc[i].text.lower())
 
-    def TopEntities(self, query):
+    def TopEntities(self, query, target_lang='en', embedding_path=None):
         #print("Parse the query")
-        parser = Parser(query, self.doc_words, testing=self.testing)
+        parser = Parser(query, target_lang, self.doc_words, self.testing, embedding_path)
         if not parser.is_parsed:
             self.error_msg = parser.error_msg
             return []

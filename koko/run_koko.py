@@ -38,7 +38,11 @@ op.add_option("--log_level",
 op.add_option("--target_lang",
               action="store", type="string", dest="target_lang",
               default="en",
-              help="Target language: language represented by ISO 639-1 Code")
+              help="Target language: language represented by ISO 639-1 Code.")
+op.add_option("--embedding_file",
+              action="store", type="string", dest="embedding_file",
+              default="../input/embedding.txt",
+              help="The path to the embedding file.")
 
 (opts, args) = op.parse_args()
 if len(args) > 0:
@@ -63,7 +67,7 @@ with open(opts.query_file, 'r') as qfile:
 
 from query_processor import QueryProcessor
 processor = QueryProcessor(opts.doc_parser, opts.target_lang)
-response = processor.ProcessQuery(query)
+response = processor.ProcessQuery(query, embedding_path=embedding_file)
 
 # Print the results
 if opts.output_format == 'text':

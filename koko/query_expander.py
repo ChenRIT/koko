@@ -70,7 +70,7 @@ class QueryExpander(object):
             #print('Ontology file not found:', file_path)
             return
         
-        print('Loading ontology from:', file_path)
+        #print('Loading ontology from:', file_path)
         with open(file_path, 'r') as ontology_f:
             for line in ontology_f:
                 parent_word, child_word = line.rstrip().split('\t')
@@ -135,7 +135,7 @@ class QueryExpander(object):
         return result_list
        
 
-def create_query_expanders(testing):
+def create_query_expanders(testing, embedding_path):
     if testing:
         query_expanders = {
             'en': QueryExpander('en')
@@ -143,7 +143,8 @@ def create_query_expanders(testing):
         return query_expanders
     
     #print('Loading embedding models')
-    en_embedding_file_path = ROOT + '/../embeddings/commoncrawl.840B.300d.txt'
+    #en_embedding_file_path = ROOT + '/../embeddings/commoncrawl.840B.300d.txt'
+    en_embedding_file_path = embedding_path
     ontology_file_path = ROOT + '/../coffee_ontology.txt'
     ja_embedding_file_path = ROOT + '/../embeddings/japanese_noun_verb_embedding_vectors.txt'
     query_expanders = {
