@@ -35,6 +35,14 @@ op.add_option("--log_level",
               action="store", type="string", dest="log_level",
               default="info",
               help="Logging level: info, warning, error.")
+op.add_option("--target_lang",
+              action="store", type="string", dest="target_lang",
+              default="en",
+              help="Target language: language represented by ISO 639-1 Code.")
+op.add_option("--embedding_file",
+              action="store", type="string", dest="embedding_file",
+              default="../input/embedding.txt",
+              help="The path to the embedding file.")
 
 (opts, args) = op.parse_args()
 if len(args) > 0:
@@ -58,8 +66,8 @@ with open(opts.query_file, 'r') as qfile:
 # Process the KOKO query
 
 from query_processor import QueryProcessor
-processor = QueryProcessor(opts.doc_parser)
-response = processor.ProcessQuery(query)
+processor = QueryProcessor(opts.doc_parser, opts.target_lang)
+response = processor.ProcessQuery(query, embedding_path=embedding_file)
 
 # Print the results
 if opts.output_format == 'text':
@@ -68,3 +76,11 @@ if opts.output_format == 'text':
     print("================================================================")
     for entity in response.entities:
         print("%s %f" % ("{:<50}".format(entity.name), entity.score))
+else:
+    import json
+    import jsonpickle
+    pickled = jsonpickle.encode(response, unpicklable=False)
+    json_result = json.loads(pickled)
+    print(json.dumps(json_result, sort_keys=False, indent=2))
+    with open('json_result.txt', 'w') as ofile:
+        json.dump(json_result, ofile)

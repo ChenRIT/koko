@@ -19,7 +19,7 @@ import logging
 from .query_processor import QueryProcessor
 
 
-def run(query_file, doc_parser="koko", output_format="text", log_level="info"):
+def run(query_file, doc_parser="koko", output_format="text", log_level="info", target_lang='en', embedding_file="../input/embedding.txt"):
     # Set up logging
     logging_level_dict = {'info': logging.INFO,
                           'warning': logging.WARNING,
@@ -37,8 +37,8 @@ def run(query_file, doc_parser="koko", output_format="text", log_level="info"):
 
     # Process the KOKO query
 
-    processor = QueryProcessor(doc_parser)
-    response = processor.ProcessQuery(query)
+    processor = QueryProcessor(doc_parser, target_lang)
+    response = processor.ProcessQuery(query, embedding_path=embedding_file)
 
     # Print the results
     if output_format == 'text':
@@ -47,3 +47,11 @@ def run(query_file, doc_parser="koko", output_format="text", log_level="info"):
         print("===============================================================")
         for entity in response.entities:
             print("%s %f" % ("{:<50}".format(entity.name), entity.score))
+    else:
+        import json
+        import jsonpickle
+        pickled = jsonpickle.encode(response, unpicklable=False)
+        json_result = json.loads(pickled)
+        print(json.dumps(json_result, sort_keys=False, indent=2))
+        with open('json_result.txt', 'w') as ofile:
+            json.dump(json_result, ofile)
