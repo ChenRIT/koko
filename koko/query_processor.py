@@ -36,9 +36,9 @@ class QueryProcessor:
         self.document_parser = document_parser
         self.target_lang = target_lang
         if self.document_parser == 'spacy':
-            logger.info("Loading SpaCy English models")
+            #logger.info("Loading SpaCy English models")
             self.nlp = spacy.load('en')
-            logger.info("Done")
+            #logger.info("Done")
 
     def ProcessQuery(self, query, document=None, embedding_path=None):
         query_parser = Parser(query, target_lang=self.target_lang, embedding_path=embedding_path)
