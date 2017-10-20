@@ -101,7 +101,8 @@ class SemanticScorer(object):
                         if end == len(sent):
                             continue
                         sequence = sent[end:len(sent)]
-                    if self.SubsequenceMatch(sequence, expanded_tokens):
+                    #if self.SubsequenceMatch(sequence, expanded_tokens):
+                    if self.SubsequenceExactMatch(sequence, expanded_tokens, predicate.type):
                         maximum_score = score
                         mention.debug = '%s : %s' % (' '.join(expanded_tokens),
                                                      entailed_sentence.doc.text)
@@ -118,5 +119,20 @@ class SemanticScorer(object):
                     start = pos + 1
                     break
             if not found:
+                return False
+        return True
+
+    def SubsequenceExactMatch(self, sequence, pattern, pred_type):
+        "Determine if 'pattern' is a exact subsequence of 'sequence'"
+        start = len(sequence) - len(pattern)
+        if start < 0:
+            return False
+
+        if pred_type == 'right':
+            start = 0
+
+        for offset in range(len(pattern)):
+            sent_idx = start + offset
+            if sequence[sent_idx].text.lower() != pattern[offset].lower():
                 return False
         return True
