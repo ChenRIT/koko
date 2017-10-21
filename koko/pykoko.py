@@ -43,10 +43,13 @@ def run(query_file, doc_parser="koko", output_format="text", log_level="info", t
     # Print the results
     if output_format == 'text':
         print("\nResults:\n")
-        print("%s %s" % ("{:<50}".format("Entity name"), "Entity score"))
-        print("===============================================================")
+        #print("%s %s" % ("{:<50}".format("Entity name"), "Entity score"))
+        print("%s %s %s" % ("{:<30}".format("Entity name"), "{:<20}".format("Entity count"), "Entity score"))        
+        #print("===============================================================")
+        print("="*70)
         for entity in response.entities:
-            print("%s %f" % ("{:<50}".format(entity.name), entity.score))
+            #print("%s %f" % ("{:<50}".format(entity.name), entity.score))
+            print("%s %s %f" % ("{:<30}".format(entity.name), "{:<20}".format(str(len(entity.mentions))), entity.score))
     else:
         import json
         import jsonpickle
