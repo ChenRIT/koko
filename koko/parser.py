@@ -98,7 +98,7 @@ class Parser:
         self.curr_pos = 0
         self.error_msg = ''
         global query_expanders 
-        if not query_expanders:
+        if (not query_expanders) or (query_expanders[target_lang].embedding_path != embedding_path):
             query_expanders = create_query_expanders(testing, embedding_path)
         self.is_parsed = self.Parse(query)
 

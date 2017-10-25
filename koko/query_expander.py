@@ -28,6 +28,7 @@ class QueryExpander(object):
     def __init__(self, lang, embedding_file_path=None, ontology_file_path=None):
         #print('Creating QueryExpander for:', lang)
         self.lang = lang
+        self.embedding_path = embedding_file_path
         self.__embed_vectors = None
         self.__ontology_dict = None
         self.__load_embeding_model(embedding_file_path)
