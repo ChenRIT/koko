@@ -67,7 +67,7 @@ with open(opts.query_file, 'r') as qfile:
 
 from query_processor import QueryProcessor
 processor = QueryProcessor(opts.doc_parser, opts.target_lang)
-response = processor.ProcessQuery(query, embedding_path=embedding_file)
+response, _ = processor.ProcessQuery(query, embedding_path=embedding_file)
 
 # Print the results
 if opts.output_format == 'text':

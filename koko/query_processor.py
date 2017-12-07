@@ -60,5 +60,6 @@ class QueryProcessor:
             return None
         extractor = EntityExtractor(doc)
         entities = extractor.TopEntitiesForParsedQuery(query_parser)
-        return KokoResponse(query, document, entities)
+        response = KokoResponse(query, document, entities)
+        return response, doc
 

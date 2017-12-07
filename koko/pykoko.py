@@ -19,7 +19,7 @@ import logging
 from .query_processor import QueryProcessor
 
 
-def run(query_file, doc_parser="koko", output_format="text", log_level="info", target_lang='en', embedding_file="../input/embedding.txt"):
+def run(query_file, doc_parser="koko", output_format="text", log_level="info", target_lang='en', embedding_file="../input/embedding.txt", verbose_info=False):
     # Set up logging
     logging_level_dict = {'info': logging.INFO,
                           'warning': logging.WARNING,
@@ -38,10 +38,12 @@ def run(query_file, doc_parser="koko", output_format="text", log_level="info", t
     # Process the KOKO query
 
     processor = QueryProcessor(doc_parser, target_lang)
-    response = processor.ProcessQuery(query, embedding_path=embedding_file)
+    response, doc = processor.ProcessQuery(query, embedding_path=embedding_file)
 
     # Print the results
     if output_format == 'text':
+        sents = list(doc.sents)
+        
         print("\nResults:\n")
         #print("%s %s" % ("{:<50}".format("Entity name"), "Entity score"))
         print("%s %s %s" % ("{:<30}".format("Entity name"), "{:<20}".format("Entity count"), "Entity score"))        
@@ -50,6 +52,11 @@ def run(query_file, doc_parser="koko", output_format="text", log_level="info", t
         for entity in response.entities:
             #print("%s %f" % ("{:<50}".format(entity.name), entity.score))
             print("%s %s %f" % ("{:<30}".format(entity.name), "{:<20}".format(str(len(entity.mentions))), entity.score))
+            if verbose_info == True:
+                entity_mentions = entity.mentions
+                for mention in entity_mentions:
+                    origin_sent = sents[mention.sentence_index].text
+                    print("\t {} \n".format(origin_sent))
     else:
         import json
         import jsonpickle
